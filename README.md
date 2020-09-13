@@ -7,7 +7,7 @@
 ### Pull
 
 ```
-$ docker pull metowolf/php
+$ docker pull idawnlight/php
 ```
 
 ### Extension
