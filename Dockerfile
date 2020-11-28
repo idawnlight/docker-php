@@ -161,6 +161,7 @@ RUN apk add --no-cache \
 # imagick
 RUN apk add --no-cache \
     imagemagick-dev \
+    git \
   # && (pickle install imagick -n --defaults || true) \
   && (pickle install https://github.com/Imagick/imagick.git -n --defaults || true) \
   && cd /tmp/imagick/imagick* \
