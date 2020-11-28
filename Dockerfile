@@ -159,19 +159,18 @@ RUN apk add --no-cache \
   && (rm -rf /usr/local/lib/php/doc/gmp || true)
 
 # imagick
-RUN apk add --no-cache \
-    imagemagick-dev \
-    git \
-  # && (pickle install imagick -n --defaults || true) \
-  && (pickle install https://github.com/Imagick/imagick.git -n --defaults || true) \
-  && cd /tmp/imagick/imagick* \
-  && phpize \
-  && ./configure \
-  && make -j$(getconf _NPROCESSORS_ONLN) \
-  && make install \
-  && docker-php-ext-enable imagick \
-  && (rm -rf /usr/local/lib/php/test/imagick || true) \
-  && (rm -rf /usr/local/lib/php/doc/imagick || true)
+# TODO: RECOVER
+# RUN apk add --no-cache \
+#     imagemagick-dev \
+#   && (pickle install imagick -n --defaults || true) \
+#   && cd /tmp/imagick/imagick* \
+#   && phpize \
+#   && ./configure \
+#   && make -j$(getconf _NPROCESSORS_ONLN) \
+#   && make install \
+#   && docker-php-ext-enable imagick \
+#   && (rm -rf /usr/local/lib/php/test/imagick || true) \
+#   && (rm -rf /usr/local/lib/php/doc/imagick || true)
 
 # intl
 RUN apk add --no-cache \
