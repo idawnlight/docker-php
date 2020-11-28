@@ -30,7 +30,7 @@ gettext
 gmp
 hash
 iconv
-imagick
+imagick (in future)
 intl
 json
 libxml
@@ -66,7 +66,6 @@ tidy
 tokenizer
 xml
 xmlreader
-xmlrpc
 xmlwriter
 xsl
 Zend OPcache
