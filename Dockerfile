@@ -4,7 +4,7 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=7.4.13
+ARG PHP_VERSION=8.0.0
 ARG COMPOSER_VERSION=2.0.7
 
 ENV PHP_INI_DIR /usr/local/etc/php
@@ -20,8 +20,8 @@ RUN set -ex \
   && wget -O php.tar.xz.asc https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz.asc \
   && export GNUPGHOME="$(mktemp -d)"; \
     for key in \
-      42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
-      5A52880781F755608BF815FC910DEB46F53EA312 \
+      1729F83938DA44E27BA0F4D3DBDB397470D12172 \
+      BFDDD28642824F8118EF77909B67A5C12229118F \
     ; do \
       gpg --batch --keyserver ha.pool.sks-keyservers.net --keyserver-options timeout=10 --recv-keys "$key" || \
       gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --keyserver-options timeout=10 --recv-keys "$key" || \
