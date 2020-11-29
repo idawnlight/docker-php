@@ -366,6 +366,8 @@ RUN set -ex \
       echo 'opcache.revalidate_freq=60'; \
       echo 'opcache.fast_shutdown=1'; \
       echo 'opcache.enable_cli=1'; \
+      echo 'opcache.jit=1255'; \
+      echo 'opcache.jit_buffer_size=100M'; \
     } > /usr/local/etc/php/conf.d/opcache-recommended.ini \
   && { \
       echo 'memory_limit=256M'; \
