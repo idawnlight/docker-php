@@ -162,9 +162,9 @@ RUN apk add --no-cache \
 # follow https://github.com/Imagick/imagick/issues/358#issuecomment-768586107
 RUN apk add --no-cache \
     imagemagick-dev \
-    && mkdir -p /usr/src/php/ext/imagick; \
-    && curl -fsSL https://github.com/Imagick/imagick/archive/master.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1; \
-    && docker-php-ext-install imagick; \
+    && mkdir -p /usr/src/php/ext/imagick \
+    && curl -fsSL https://github.com/Imagick/imagick/archive/master.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1 \
+    && docker-php-ext-install imagick \
     && (rm -rf /usr/local/lib/php/test/imagick || true) \
     && (rm -rf /usr/local/lib/php/doc/imagick || true)
 
