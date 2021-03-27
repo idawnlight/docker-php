@@ -260,7 +260,7 @@ RUN (pickle install swoole -n --defaults || true) \
     --enable-sockets \
     --enable-http2 \
     --enable-mysqlnd \
-    --enable-coroutine-postgresql \
+    --enable-swoole-json \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && make install \
   && docker-php-ext-enable swoole \
