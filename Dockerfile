@@ -4,8 +4,8 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=8.0.3
-ARG COMPOSER_VERSION=2.0.11
+ARG PHP_VERSION=8.0.8
+ARG COMPOSER_VERSION=2.1.3
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
@@ -158,15 +158,18 @@ RUN apk add --no-cache \
   && (rm -rf /usr/local/lib/php/test/gmp || true) \
   && (rm -rf /usr/local/lib/php/doc/gmp || true)
 
-# imagick (dev)
-# follow https://github.com/Imagick/imagick/issues/358#issuecomment-768586107
+# imagick
 RUN apk add --no-cache \
-    curl imagemagick-dev \
-    && mkdir -p /usr/src/php/ext/imagick \
-    && curl -fsSL https://github.com/Imagick/imagick/archive/master.tar.gz | tar xvz -C "/usr/src/php/ext/imagick" --strip 1 \
-    && docker-php-ext-install imagick \
-    && (rm -rf /usr/local/lib/php/test/imagick || true) \
-    && (rm -rf /usr/local/lib/php/doc/imagick || true)
+    imagemagick-dev \
+  && (pickle install imagick -n --defaults || true) \
+  && cd /tmp/imagick/imagick* \
+  && phpize \
+  && ./configure \
+  && make -j$(getconf _NPROCESSORS_ONLN) \
+  && make install \
+  && docker-php-ext-enable imagick \
+  && (rm -rf /usr/local/lib/php/test/imagick || true) \
+  && (rm -rf /usr/local/lib/php/doc/imagick || true)
 
 # intl
 RUN apk add --no-cache \
