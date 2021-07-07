@@ -23,8 +23,8 @@ RUN set -ex \
       1729F83938DA44E27BA0F4D3DBDB397470D12172 \
       BFDDD28642824F8118EF77909B67A5C12229118F \
     ; do \
-      gpg --batch --keyserver ha.pool.sks-keyservers.net --keyserver-options timeout=10 --recv-keys "$key" || \
-      gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --keyserver-options timeout=10 --recv-keys "$key" || \
+      gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --keyserver-options timeout=10 --recv-keys "$key" || \
+      gpg --batch --keyserver hkps://keys.openpgp.org --keyserver-options timeout=10 --recv-keys "$key" || \
       gpg --batch --keyserver hkp://pgp.mit.edu:80 --keyserver-options timeout=10 --recv-keys "$key" ; \
     done \
   && gpg --batch --verify php.tar.xz.asc php.tar.xz
