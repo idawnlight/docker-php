@@ -16,8 +16,8 @@ RUN set -ex \
   && cd /usr/src \
   # && wget -O php.tar.xz https://secure.php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror \
   # && wget -O php.tar.xz.asc https://secure.php.net/get/php-$PHP_VERSION.tar.xz.asc/from/this/mirror \
-  && wget -O php.tar.xz https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz \
-  && wget -O php.tar.xz.asc https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz.asc \
+  && wget -O php.tar.xz https://www.php.net/distributions/php-$PHP_VERSION.tar.xz \
+  && wget -O php.tar.xz.asc https://www.php.net/distributions/php-$PHP_VERSION.tar.xz.asc \
   && export GNUPGHOME="$(mktemp -d)"; \
     for key in \
       528995BFEDFBA7191D46839EF9BA0ADA31CBD89E \
