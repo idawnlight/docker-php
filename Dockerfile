@@ -4,8 +4,8 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=8.0.9
-ARG COMPOSER_VERSION=2.1.5
+ARG PHP_VERSION=8.1.0
+ARG COMPOSER_VERSION=2.1.14
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
@@ -20,8 +20,9 @@ RUN set -ex \
   && wget -O php.tar.xz.asc https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz.asc \
   && export GNUPGHOME="$(mktemp -d)"; \
     for key in \
-      1729F83938DA44E27BA0F4D3DBDB397470D12172 \
-      BFDDD28642824F8118EF77909B67A5C12229118F \
+      528995BFEDFBA7191D46839EF9BA0ADA31CBD89E \
+      39B641343D8C104B2B146DC3F9C39DC0B9698544 \
+      F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD \
     ; do \
       gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --keyserver-options timeout=10 --recv-keys "$key" || \
       gpg --batch --keyserver hkps://keys.openpgp.org --keyserver-options timeout=10 --recv-keys "$key" || \
