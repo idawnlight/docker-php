@@ -258,20 +258,20 @@ RUN docker-php-ext-enable sodium \
   && (rm -rf /usr/local/lib/php/doc/sodium || true)
 
 # swoole
-RUN (pickle install swoole -n --defaults || true) \
-  && cd /tmp/swoole/swoole* \
-  && phpize \
-  && ./configure \
-    --enable-openssl \
-    --enable-sockets \
-    --enable-http2 \
-    --enable-mysqlnd \
-    --enable-swoole-json \
-  && make -j$(getconf _NPROCESSORS_ONLN) \
-  && make install \
-  && docker-php-ext-enable swoole \
-  && (rm -rf /usr/local/lib/php/test/swoole || true) \
-  && (rm -rf /usr/local/lib/php/doc/swoole || true)
+# RUN (pickle install swoole -n --defaults || true) \
+#   && cd /tmp/swoole/swoole* \
+#   && phpize \
+#   && ./configure \
+#     --enable-openssl \
+#     --enable-sockets \
+#     --enable-http2 \
+#     --enable-mysqlnd \
+#     --enable-swoole-json \
+#   && make -j$(getconf _NPROCESSORS_ONLN) \
+#   && make install \
+#   && docker-php-ext-enable swoole \
+#   && (rm -rf /usr/local/lib/php/test/swoole || true) \
+#   && (rm -rf /usr/local/lib/php/doc/swoole || true)
 
 # sysvsem
 RUN docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) sysvsem \
