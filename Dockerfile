@@ -4,7 +4,7 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=8.0.13
+ARG PHP_VERSION=8.1.0
 ARG COMPOSER_VERSION=2.1.14
 
 ENV PHP_INI_DIR /usr/local/etc/php
@@ -324,7 +324,7 @@ RUN set -ex \
       | sort -u \
       | awk 'system("[ -e /usr/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
     )" \
-  && apk --no-cache add $runDeps \
+  && apk --no-cache add $runDeps imagemagick \
   && addgroup -g 48 -S www-data \
   && adduser -u 990 -D -S -G www-data www-data \
   && cd /usr/local/etc \
