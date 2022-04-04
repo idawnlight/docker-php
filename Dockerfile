@@ -4,8 +4,8 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=7.4.28
-ARG COMPOSER_VERSION=2.2.6
+ARG PHP_VERSION=8.0.17
+ARG COMPOSER_VERSION=2.3.3
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
