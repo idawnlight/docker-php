@@ -4,8 +4,8 @@ FROM alpine:3.12 as builder
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=7.4.13
-ARG COMPOSER_VERSION=2.0.7
+ARG PHP_VERSION=7.4.33
+ARG COMPOSER_VERSION=2.6.5
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
@@ -14,10 +14,8 @@ RUN set -ex \
   && apk add --no-cache gnupg \
   && mkdir -p /usr/src \
   && cd /usr/src \
-  # && wget -O php.tar.xz https://secure.php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror \
-  # && wget -O php.tar.xz.asc https://secure.php.net/get/php-$PHP_VERSION.tar.xz.asc/from/this/mirror \
-  && wget -O php.tar.xz https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz \
-  && wget -O php.tar.xz.asc https://php-net.dawn.workers.dev/distributions/php-$PHP_VERSION.tar.xz.asc \
+  && wget -O php.tar.xz https://secure.php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror \
+  && wget -O php.tar.xz.asc https://secure.php.net/get/php-$PHP_VERSION.tar.xz.asc/from/this/mirror \
   && export GNUPGHOME="$(mktemp -d)"; \
     for key in \
       42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
