@@ -98,7 +98,7 @@ RUN set -xe \
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # pickle
-RUN wget -O /usr/bin/pickle https://github.com/FriendsOfPHP/pickle/releases/download/v0.4.0/pickle.phar \
+RUN wget -O /usr/bin/pickle https://github.com/FriendsOfPHP/pickle/releases/download/v0.7.11/pickle.phar \
   && chmod a+x /usr/bin/pickle
 
 # apcu
@@ -253,7 +253,7 @@ RUN docker-php-ext-enable sodium \
   && (rm -rf /usr/local/lib/php/doc/sodium || true)
 
 # swoole
-RUN (pickle install swoole -n --defaults || true) \
+RUN (pickle install swoole@4.8.13 -n --defaults || true) \
   && cd /tmp/swoole/swoole* \
   && phpize \
   && ./configure \
