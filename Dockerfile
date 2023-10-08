@@ -55,7 +55,6 @@ RUN set -xe \
   && cd /usr/src/php \
   \
   && mkdir -p $PHP_INI_DIR/conf.d \
-  && addgroup -g 82 -S www-data \
   && adduser -u 82 -D -S -G www-data www-data \
   \
   && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
@@ -325,7 +324,6 @@ RUN set -ex \
       | awk 'system("[ -e /usr/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
     )" \
   && apk --no-cache add $runDeps \
-  && addgroup -g 48 -S www-data \
   && adduser -u 990 -D -S -G www-data www-data \
   && cd /usr/local/etc \
   && if [ -d php-fpm.d ]; then \
