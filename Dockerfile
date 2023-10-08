@@ -1,4 +1,4 @@
-FROM alpine:3.18 as builder
+FROM alpine:3.16 as builder
 
 # Appreciate metowolf for this great work!
 # LABEL maintainer="metowolf <i@i-meto.com>"
@@ -307,7 +307,7 @@ RUN strip --strip-all `php-config --extension-dir`/*.so
 
 
 
-FROM alpine:3.18
+FROM alpine:3.16
 
 # Appreciate metowolf for this great work!
 # LABEL maintainer="metowolf <i@i-meto.com>"
