@@ -323,6 +323,7 @@ RUN set -ex \
       | awk 'system("[ -e /usr/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
     )" \
   && apk --no-cache add $runDeps \
+  && apk --no-cache add imagemagick \
   && adduser -u 990 -D -S -G www-data www-data \
   && cd /usr/local/etc \
   && if [ -d php-fpm.d ]; then \
