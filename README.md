@@ -1,13 +1,7 @@
-# What's different?
-
-- Fixed a temporary build issue
-  - [Bug #79445: Connection timed out when accessing website from github actions](https://bugs.php.net/bug.php?id=79445)
-  - It seems php.net has terminated the mirror project, so I had to download via cloudflare workers.
-
 ### Pull
 
 ```
-$ docker pull idawnlight/php
+$ docker pull ghcr.io/idawnlight/php:[tag]
 ```
 
 ### Extension
@@ -30,7 +24,7 @@ gettext
 gmp
 hash
 iconv
-imagick (in future)
+imagick
 intl
 json
 libxml
@@ -48,6 +42,7 @@ pdo_sqlite
 pgsql
 Phar
 posix
+random
 readline
 redis
 Reflection

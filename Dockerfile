@@ -1,11 +1,11 @@
-FROM alpine:3.12 as builder
+FROM alpine:3.18 as builder
 
 # Appreciate metowolf for this great work!
 # LABEL maintainer="metowolf <i@i-meto.com>"
 LABEL maintainer="idawnlight <idawn@live.com>"
 
-ARG PHP_VERSION=8.1.9
-ARG COMPOSER_VERSION=2.3.10
+ARG PHP_VERSION=8.2.11
+ARG COMPOSER_VERSION=2.6.5
 
 ENV PHP_INI_DIR /usr/local/etc/php
 
@@ -14,19 +14,13 @@ RUN set -ex \
   && apk add --no-cache gnupg \
   && mkdir -p /usr/src \
   && cd /usr/src \
-  # && wget -O php.tar.xz https://secure.php.net/get/php-$PHP_VERSION.tar.xz/from/this/mirror \
-  # && wget -O php.tar.xz.asc https://secure.php.net/get/php-$PHP_VERSION.tar.xz.asc/from/this/mirror \
   && wget -O php.tar.xz https://www.php.net/distributions/php-$PHP_VERSION.tar.xz \
   && wget -O php.tar.xz.asc https://www.php.net/distributions/php-$PHP_VERSION.tar.xz.asc \
   && export GNUPGHOME="$(mktemp -d)"; \
     for key in \
-      42670A7FE4D0441C8E4632349E4FDC074A4EF02D \
-      5A52880781F755608BF815FC910DEB46F53EA312 \
-      1729F83938DA44E27BA0F4D3DBDB397470D12172 \
-      BFDDD28642824F8118EF77909B67A5C12229118F \
-      528995BFEDFBA7191D46839EF9BA0ADA31CBD89E \
+      1198C0117593497A5EC5C199286AF1F9897469DC \
       39B641343D8C104B2B146DC3F9C39DC0B9698544 \
-      F1F692238FBC1666E5A5CCD4199F9DFEF6FFBAFD \
+      E60913E4DF209907D8E30D96659A97C9CF2A795A \
     ; do \
       gpg --batch --keyserver hkp://keyserver.ubuntu.com:80 --keyserver-options timeout=10 --recv-keys "$key" || \
       gpg --batch --keyserver hkps://keys.openpgp.org --keyserver-options timeout=10 --recv-keys "$key" || \
@@ -62,7 +56,6 @@ RUN set -xe \
   && cd /usr/src/php \
   \
   && mkdir -p $PHP_INI_DIR/conf.d \
-  && addgroup -g 82 -S www-data \
   && adduser -u 82 -D -S -G www-data www-data \
   \
   && gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
@@ -105,7 +98,7 @@ RUN set -xe \
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # pickle
-RUN wget -O /usr/bin/pickle https://github.com/FriendsOfPHP/pickle/releases/download/v0.4.0/pickle.phar \
+RUN wget -O /usr/bin/pickle https://github.com/FriendsOfPHP/pickle/releases/download/v0.7.11/pickle.phar \
   && chmod a+x /usr/bin/pickle
 
 # apcu
@@ -311,7 +304,7 @@ RUN strip --strip-all `php-config --extension-dir`/*.so
 
 
 
-FROM alpine:3.12
+FROM alpine:3.18
 
 # Appreciate metowolf for this great work!
 # LABEL maintainer="metowolf <i@i-meto.com>"
@@ -327,7 +320,6 @@ RUN set -ex \
       | awk 'system("[ -e /usr/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
     )" \
   && apk --no-cache add $runDeps imagemagick \
-  && addgroup -g 48 -S www-data \
   && adduser -u 990 -D -S -G www-data www-data \
   && cd /usr/local/etc \
   && if [ -d php-fpm.d ]; then \
