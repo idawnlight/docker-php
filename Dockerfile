@@ -132,7 +132,7 @@ ARG SWOOLE_VERSION=4.8.13
 ARG SWOOLE_SHA256=f4b7b856c112b1058985e0b1fca320ec1211299607b363073de9a709628ad32a
 RUN docker-php-pecl-install swoole "$SWOOLE_VERSION" "$SWOOLE_SHA256" \
         --enable-openssl --enable-sockets --enable-mysqlnd \
-        --enable-http2 --enable-coroutine-postgresql
+        --enable-http2
 
 ARG COMPOSER_VERSION=2.10.3
 ARG COMPOSER_SHA256=7a2d379d5b8ffdaa028580ef26494c36d2feef4b178d3dd1473a4dbc5e17c8d6
