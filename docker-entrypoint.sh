@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ ! -z "$ENABLE_CRONTAB" ]; then
+if [ -n "${ENABLE_CRONTAB:-}" ]; then
 	crond -f &
 fi
 

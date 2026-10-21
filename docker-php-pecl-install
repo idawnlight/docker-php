@@ -1,0 +1,29 @@
+#!/bin/sh
+set -eu
+
+if [ "$#" -lt 3 ]; then
+    echo "usage: $0 extension version sha256 [configure flags...]" >&2
+    exit 1
+fi
+
+extension="$1"
+version="$2"
+sha256="$3"
+shift 3
+
+buildDir="$(mktemp -d)"
+trap 'rm -rf "$buildDir"' EXIT HUP INT TERM
+cd "$buildDir"
+curl -fsSL --retry 3 -o extension.tgz "https://pecl.php.net/get/${extension}-${version}.tgz"
+echo "$sha256 *extension.tgz" | sha256sum -c -
+mkdir source
+tar -xzf extension.tgz -C source --strip-components=1 "${extension}-${version}"
+cd source
+export CFLAGS="${CFLAGS:-${PHP_CFLAGS:-}}" \
+    CPPFLAGS="${CPPFLAGS:-${PHP_CPPFLAGS:-}}" \
+    LDFLAGS="${LDFLAGS:-${PHP_LDFLAGS:-}}"
+phpize
+./configure --enable-option-checking=fatal "$@"
+make -j"$(nproc)"
+make install
+docker-php-ext-enable "$extension"
